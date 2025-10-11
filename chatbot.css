@@ -1,0 +1,195 @@
+/* ===== VARIABLES ===== */
+:root {
+  --bg: #050510;
+  --neon: #00ffff;
+  --aura: #8a2be2;
+  --text: #e0e0ff;
+  --accent: #ff00ff;
+  --font-main: 'Orbitron', sans-serif;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+  background: var(--bg);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== PORTAL OVERLAY (always active on load) ===== */
+.strike-portal {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.95) 0%, #000 90%);
+  backdrop-filter: blur(10px);
+  opacity: 1;
+  pointer-events: all;
+  transition: all 0.6s ease-in-out;
+  z-index: 9;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4rem 2rem;
+  animation: portalFade 0.8s ease forwards;
+}
+
+@keyframes portalFade {
+  0% { opacity: 0; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ===== PORTAL GLOW ===== */
+.portal-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--aura) 0%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: 0.1;
+  animation: pulseGlow 3s infinite alternate;
+}
+@keyframes pulseGlow {
+  0% { opacity: 0.1; }
+  100% { opacity: 0.3; }
+}
+
+/* ===== PORTAL CONTENT ===== */
+.portal-content {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+  z-index: 2;
+  color: var(--text);
+}
+
+/* ===== HEADER ===== */
+.portal-header h2 {
+  font-size: 2.5rem;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--aura), 0 0 20px var(--neon), 0 0 40px var(--accent);
+  animation: flicker 2s infinite;
+}
+.portal-header p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 5px var(--neon);
+  animation: pulseText 3s infinite alternate;
+}
+
+/* ===== SYSTEM TEXT / INIT ===== */
+.portal-init {
+  margin-top: 2rem;
+  font-family: 'Courier New', monospace;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.portal-init .line {
+  opacity: 0;
+  transform: translateY(10px);
+  color: var(--neon);
+  text-shadow: 0 0 5px var(--neon);
+  animation: initLine 1s forwards;
+  margin-bottom: 0.8rem;
+}
+.portal-init .line:nth-child(1) { animation-delay: 0.5s; }
+.portal-init .line:nth-child(2) { animation-delay: 1.5s; }
+.portal-init .line:nth-child(3) { animation-delay: 2.5s; }
+.portal-init .line:nth-child(4) { animation-delay: 3.5s; }
+.portal-init .line:nth-child(5) { animation-delay: 4.5s; }
+
+.portal-init .line::after {
+  content: '|';
+  margin-left: 5px;
+  animation: blinkCursor 0.8s steps(1) infinite;
+}
+@keyframes blinkCursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@keyframes initLine {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== TRAILER ===== */
+.trailer {
+  width: 80%;
+  max-width: 800px;
+  border: 2px solid var(--neon);
+  margin-top: 2rem;
+  border-radius: 20px;
+  opacity: 0;
+  animation: showTrailer 1s ease 5s forwards;
+  box-shadow: 0 0 30px var(--neon), 0 0 60px var(--accent);
+}
+@keyframes showTrailer { to { opacity: 1; transform: scale(1); } }
+
+/* ===== QUEST CARDS ===== */
+.quest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  opacity: 0;
+  animation: showCards 1s ease 6s forwards;
+}
+@keyframes showCards { to { opacity: 1; transform: translateY(0); } }
+
+.quest-card {
+  background: rgba(5, 5, 15, 0.85);
+  border: 1px solid var(--aura);
+  border-radius: 15px;
+  padding: 1.5rem;
+  color: var(--text);
+  text-align: left;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.quest-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 35px var(--aura), 0 0 60px var(--accent);
+}
+.quest-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(0,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  animation: holoSweep 3s infinite linear;
+}
+@keyframes holoSweep { to { transform: translateX(100%); } }
+
+.quest-card h3 {
+  color: var(--neon);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px var(--neon), 0 0 25px var(--accent);
+  animation: flicker 3s infinite alternate;
+}
+.quest-card p { font-size: 0.95rem; opacity: 0.9; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes flicker {
+  0%,19%,21%,23%,25%,54%,56%,100% {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--neon), 0 0 20px var(--accent);
+  }
+  20%,22%,24%,55% { opacity: 0.3; text-shadow: none; }
+}
+@keyframes pulseText {
+  0% { text-shadow: 0 0 5px var(--neon); }
+  100% { text-shadow: 0 0 20px var(--neon), 0 0 40px var(--accent); }
+}
