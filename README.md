@@ -5,7 +5,8 @@ HTML and CSS Hackathon Project
 A modern, high-performance static website built entirely using **HTML5** and **CSS3**, developed during a hackathon challenge where only pure frontend technologies were allowed.  
 **STRIKE** demonstrates the power of clean structure, advanced CSS animation, and responsive design — all wrapped in a futuristic, neon-cyber theme.
 
-![Project Preview](./assets/preview.png)
+![Project Preview](./assets/strike_project_overview.png)
+Live Link : https://strike-dsa-genai-project.netlify.app/
 
 ---
 
